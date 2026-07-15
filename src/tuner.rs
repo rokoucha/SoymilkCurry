@@ -317,10 +317,10 @@ struct TunerProcess {
 
 impl Drop for TunerProcess {
     fn drop(&mut self) {
-        if let Err(error) = killpg(Pid::from_raw(self.pid as i32), Signal::SIGKILL) {
-            if error != nix::errno::Errno::ESRCH {
-                warn!(pid = self.pid, %error, "failed to kill tuner process group");
-            }
+        if let Err(error) = killpg(Pid::from_raw(self.pid as i32), Signal::SIGKILL)
+            && error != nix::errno::Errno::ESRCH
+        {
+            warn!(pid = self.pid, %error, "failed to kill tuner process group");
         }
     }
 }

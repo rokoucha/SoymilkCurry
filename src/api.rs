@@ -193,12 +193,12 @@ fn ts_response(body: Body, user_id: Option<&str>) -> Response {
     response
         .headers_mut()
         .insert(header::CACHE_CONTROL, HeaderValue::from_static("no-store"));
-    if let Some(user_id) = user_id {
-        if let Ok(value) = HeaderValue::from_str(user_id) {
-            response
-                .headers_mut()
-                .insert("x-mirakurun-tuner-user-id", value);
-        }
+    if let Some(user_id) = user_id
+        && let Ok(value) = HeaderValue::from_str(user_id)
+    {
+        response
+            .headers_mut()
+            .insert("x-mirakurun-tuner-user-id", value);
     }
     response
 }
