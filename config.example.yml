@@ -1,0 +1,14 @@
+listen: 0.0.0.0:40772
+
+tuners:
+  - name: DVB-T tuner
+    types: [GR]
+    command: recpt1 --device /dev/pt3video0 <channel> - -
+
+channels:
+  - name: TV1
+    type: GR
+    channel: "27"
+  - name: TV2
+    type: GR
+    channel: "26"
